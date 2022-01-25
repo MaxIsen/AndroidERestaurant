@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DemoProf">
         <activity
-            android:name="fr.isen.raillard.androiderestaurant.desserts"
+            android:name=".FoodActivity"
             android:exported="false" />
         <activity
-            android:name="fr.isen.raillard.androiderestaurant.plats"
+            android:name=".desserts"
             android:exported="false" />
         <activity
-            android:name="fr.isen.raillard.androiderestaurant.Entrees"
+            android:name=".plats"
+            android:exported="false" />
+        <activity
+            android:name=".Entrees"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

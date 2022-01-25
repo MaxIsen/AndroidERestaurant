@@ -9,7 +9,7 @@ import fr.isen.raillard.androiderestaurant.databinding.ActivityHomeBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
 
-    private fun ActivitySwapper(category: String) {
+    private fun activitySwapper(category: String) {
         val changePage = Intent(this, FoodActivity::class.java)
         changePage.putExtra("category_type", category)
         startActivity(changePage)
@@ -31,15 +31,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.Entrees.setOnClickListener {
-            ActivitySwapper(getString(R.string.home_entrees))
+            activitySwapper(getString(R.string.home_entrees))
         }
 
         binding.Plats.setOnClickListener {
-            ActivitySwapper(getString(R.string.home_plats))
+            activitySwapper(getString(R.string.home_plats))
         }
 
         binding.Desserts.setOnClickListener {
-            ActivitySwapper(getString(R.string.home_desserts))
+            activitySwapper(getString(R.string.home_desserts))
         }
 
 

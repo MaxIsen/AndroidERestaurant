@@ -7,7 +7,6 @@ import android.util.Log
 import fr.isen.raillard.androiderestaurant.databinding.ActivityHomeBinding
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityHomeBinding
 
     private fun ActivitySwapper(category: String) {

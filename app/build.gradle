@@ -7,7 +7,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "fr.isen.raillard.demoprof"
+        applicationId "fr.isen.raillard.androiderestaurant"
         minSdk 21
         targetSdk 32
         versionCode 1
@@ -28,6 +28,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fr.isen.raillard.demoprof">
+    package="fr.isen.raillard.androiderestaurant">
 
     <application
         android:allowBackup="true"
@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DemoProf">
         <activity
-            android:name=".desserts"
+            android:name="fr.isen.raillard.androiderestaurant.desserts"
             android:exported="false" />
         <activity
-            android:name=".plats"
+            android:name="fr.isen.raillard.androiderestaurant.plats"
             android:exported="false" />
         <activity
-            android:name=".Entrees"
+            android:name="fr.isen.raillard.androiderestaurant.Entrees"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

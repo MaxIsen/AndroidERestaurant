@@ -1,4 +1,4 @@
-package fr.isen.raillard.demoprof
+package fr.isen.raillard.androiderestaurant
 
 import org.junit.Test
 

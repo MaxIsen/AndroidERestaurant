@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Android E Restaurant</string>
+    <string name="home_entrees">Entrees</string>
+    <string name="home_plats">Plats</string>
+    <string name="home_desserts">Desserts</string>
+    <string name="item1">Risotto</string>
+    <string name="item2">Pizza</string>
+</resources>

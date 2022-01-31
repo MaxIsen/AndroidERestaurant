@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
+// TEst
         val textView = findViewById<TextView>(R.id.textView)
 
         binding.btn.setOnClickListener {

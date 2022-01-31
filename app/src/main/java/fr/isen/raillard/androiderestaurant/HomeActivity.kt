@@ -7,7 +7,6 @@ import android.util.Log
 import android.widget.TextView
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import fr.isen.raillard.androiderestaurant.databinding.ActivityHomeBinding
 import org.json.JSONObject
@@ -48,8 +47,7 @@ class MainActivity : AppCompatActivity() {
             activitySwapper(getString(R.string.home_desserts))
         }
 
-
-// TEst
+/*
         val textView = findViewById<TextView>(R.id.textView)
 
         binding.btn.setOnClickListener {
@@ -90,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             // Add the volley post request to the request queue
             VolleySingleton.getInstance(this).addToRequestQueue(request)
         }
-
+*/
 
         /*
         Lorsque nous avions plusieurs pages, je garde le code et les pages juste au cas où

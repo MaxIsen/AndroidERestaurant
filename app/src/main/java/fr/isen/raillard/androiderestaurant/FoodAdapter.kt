@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import fr.isen.raillard.androiderestaurant.databinding.CategoryCellBinding
-import fr.isen.raillard.androiderestaurant.model.FoodModel
+import fr.isen.raillard.androiderestaurant.model.DishModel
 
-class FoodAdapter(val foods: List<FoodModel>, val onFoodClicked: (FoodModel) -> Unit): RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
+class FoodAdapter(val foods: List<DishModel>, val onFoodClicked: (DishModel) -> Unit): RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
     class FoodViewHolder(binding: CategoryCellBinding): RecyclerView.ViewHolder(binding.root) {
         val foodPicture = binding.foodPicture
@@ -21,19 +21,31 @@ class FoodAdapter(val foods: List<FoodModel>, val onFoodClicked: (FoodModel) -> 
     }
 
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
-        holder.foodName.text = foods[position].name_fr
 
-        Picasso.get()
-            .load(foods[position].getFirstPictures())
-            .error(R.drawable.risotto)
-            .placeholder(R.drawable.risotto)
-            .into(holder.foodPicture)
-        //holder.foodPicture.setImageResource(foods[position].getFirstPictures())
-        holder.foodPrice.text = foods[position].getFormattedPrice()
+
+        val dish = foods[position]
+
+        if(dish.images[0]!="") {
+            Picasso.get()
+                .load(dish.images[0])
+                .error(R.drawable.pizza)
+                .into(holder.foodPicture)
+
+
+
+        }
+        else{
+            holder.foodPicture.setImageResource(R.drawable.pizza)
+        }
+
+        holder.foodName.text = dish.name_fr
+        holder.foodPrice.text = dish.prices[0].price+"€"
+
 
         holder.itemView.setOnClickListener {
             onFoodClicked(foods[position])
         }
+
     }
 
     override fun getItemCount(): Int = foods.size

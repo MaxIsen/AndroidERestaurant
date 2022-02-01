@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.toolbox.Volley
 import fr.isen.raillard.androiderestaurant.databinding.ActivityFoodBinding
 import com.android.volley.Request
-import fr.isen.raillard.androiderestaurant.model.FoodModel
+import fr.isen.raillard.androiderestaurant.model.DishModel
 import org.json.JSONObject
 import com.android.volley.toolbox.JsonObjectRequest
 import com.google.gson.Gson
-import fr.isen.raillard.androiderestaurant.model.FoodResult
+import fr.isen.raillard.androiderestaurant.model.DishResult
 
 class FoodActivity : AppCompatActivity() {
 
@@ -37,7 +37,7 @@ class FoodActivity : AppCompatActivity() {
         jsonObject.put("id_shop", "1")
         val jsonRequest = JsonObjectRequest(
             Request.Method.POST, url, jsonObject, { response ->
-                val foodResult = Gson().fromJson(response.toString(), FoodResult::class.java)
+                val foodResult = Gson().fromJson(response.toString(), DishResult::class.java)
                 displayFoods(foodResult.data.firstOrNull { category -> category.name_fr == categoryType}?.items ?: listOf() )
 
             }, {
@@ -46,7 +46,7 @@ class FoodActivity : AppCompatActivity() {
         Volley.newRequestQueue(this).add(jsonRequest)
     }
 
-    private fun displayFoods(foods: List<FoodModel>) {
+    private fun displayFoods(foods: List<DishModel>) {
         binding.foodList.layoutManager = LinearLayoutManager(this)
 
         binding.foodList.adapter = FoodAdapter(foods) {

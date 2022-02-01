@@ -11,22 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DemoProf">
         <activity
-            android:name=".VolleySingleton"
-            android:exported="false" />
-        <activity
             android:name=".DetailActivity"
             android:exported="false" />
         <activity
             android:name=".FoodActivity"
-            android:exported="false" />
-        <activity
-            android:name=".desserts"
-            android:exported="false" />
-        <activity
-            android:name=".plats"
-            android:exported="false" />
-        <activity
-            android:name=".Entrees"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

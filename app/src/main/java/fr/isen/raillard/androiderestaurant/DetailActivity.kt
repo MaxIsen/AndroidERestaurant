@@ -5,17 +5,26 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
+import fr.isen.raillard.androiderestaurant.databinding.DetailsBinding
 import fr.isen.raillard.androiderestaurant.model.DishModel
 
 
 class DetailActivity : AppCompatActivity() {
 
+    private lateinit var binding:DetailsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
 
-        var item: String? = ""
+        binding = DetailsBinding.inflate(layoutInflater)
 
+        setContentView(binding.root)
+
+        val dish = intent.getSerializableExtra("dish") as DishModel
+        initDetail(dish)
+
+        /*setContentView(R.layout.activity_detail)
         findViewById<TextView>(R.id.TitreDetail).text = (intent.getSerializableExtra("food") as DishModel).name_fr
 
         val itemDish = intent.getSerializableExtra("food") as DishModel
@@ -39,7 +48,19 @@ class DetailActivity : AppCompatActivity() {
         val detailtext = findViewById<TextView>(R.id.detailtext)
 
         for (i in itemDish.ingredients)
-            detailtext.append(i.name_fr + " \n")
+            detailtext.append(i.name_fr + " \n")*/
 
+    }
+
+    private fun initDetail(dish: DishModel) {
+        var nbInBasket =  1
+        binding.detailTitle.text = dish.name_fr
+
+        binding.dishPhotoPager.adapter = DishPictureAdapter(this, dish.images)
+
+        binding.dishIngredient.text = dish.ingredients.joinToString("\n ") { it.name_fr }
+
+        //quand je clique sur le bouton plus, j'incrémente nbInBasket
+        // quand je clique sur le bouton moins, je décrémente nbInBasket tout en vérifiant qu'il ne devienne pas négatif
     }
 }

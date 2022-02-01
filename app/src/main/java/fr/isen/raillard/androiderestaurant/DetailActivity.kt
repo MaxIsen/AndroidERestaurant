@@ -56,6 +56,8 @@ class DetailActivity : AppCompatActivity() {
         var nbInBasket =  1
         binding.detailTitle.text = dish.name_fr
 
+        binding.Price.text = dish.prices.joinToString("\n") { it.price + "€" }
+
         binding.dishPhotoPager.adapter = DishPictureAdapter(this, dish.images)
 
         binding.dishIngredient.text = dish.ingredients.joinToString("\n") { it.name_fr }

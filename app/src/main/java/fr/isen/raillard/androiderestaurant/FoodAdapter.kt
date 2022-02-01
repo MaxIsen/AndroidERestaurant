@@ -39,7 +39,7 @@ class FoodAdapter(val foods: List<DishModel>, val onFoodClicked: (DishModel) -> 
         }
 
         holder.foodName.text = dish.name_fr
-        holder.foodPrice.text = dish.prices[0].prices+"€"
+        holder.foodPrice.text = dish.prices[0].price+"€"
 
 
         holder.itemView.setOnClickListener {

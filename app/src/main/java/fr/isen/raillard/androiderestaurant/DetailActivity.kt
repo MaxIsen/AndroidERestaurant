@@ -58,9 +58,9 @@ class DetailActivity : AppCompatActivity() {
 
         binding.dishPhotoPager.adapter = DishPictureAdapter(this, dish.images)
 
-        binding.dishIngredient.text = dish.ingredients.joinToString("\n ") { it.name_fr }
+        binding.dishIngredient.text = dish.ingredients.joinToString("\n") { it.name_fr }
 
-        //quand je clique sur le bouton plus, j'incrémente nbInBasket
-        // quand je clique sur le bouton moins, je décrémente nbInBasket tout en vérifiant qu'il ne devienne pas négatif
+        // TODO : quand je clique sur le bouton plus, j'incrémente nbInBasket
+        // TODO : quand je clique sur le bouton moins, je décrémente nbInBasket tout en vérifiant qu'il ne devienne pas négatif
     }
 }

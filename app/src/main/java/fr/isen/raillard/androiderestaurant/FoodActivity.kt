@@ -51,7 +51,7 @@ class FoodActivity : AppCompatActivity() {
 
         binding.foodList.adapter = FoodAdapter(foods) {
             val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("food", it)
+            intent.putExtra("dish", it)
             startActivity(intent)
         }
     }

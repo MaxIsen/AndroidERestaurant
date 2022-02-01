@@ -18,6 +18,6 @@ data class DishModel (
         fun getFormattedPrice() = prices[0].prices + "€"
     }*/
 
-data class PriceModel (val prices : String) : Serializable
+data class PriceModel (val price : String) : Serializable
 
 data class IngredientModel(val name_fr: String) : Serializable

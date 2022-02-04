@@ -2,154 +2,188 @@ package fr.isen.raillard.androiderestaurant
 
 import android.os.Bundle
 import android.content.Intent
-import android.text.TextUtils
-import android.view.View
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.RadioButton
-import android.widget.RadioGroup
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.AuthFailureError
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.JsonObjectRequest
 import fr.isen.raillard.androiderestaurant.databinding.ActivityRegisterBinding
-import org.json.JSONException
 import org.json.JSONObject
-import java.util.HashMap
 
 class RegisterActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityRegisterBinding
 
-    internal lateinit var editTextUsername: EditText
-    internal lateinit var editTextEmail: EditText
-    internal lateinit var editTextPassword: EditText
-    internal lateinit var radioGroupGender: RadioGroup
-    internal lateinit var progressBar: ProgressBar
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        progressBar = findViewById(R.id.progressBar)
-
         binding = ActivityRegisterBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
-        //if the user is already logged in we will directly start the MainActivity (profile) activity
-        if (SharedPrefManager.getInstance(this).isLoggedIn) {
-            finish()
-            startActivity(Intent(this, Accueil::class.java))
-            return
-        }
-
-        editTextUsername = findViewById(R.id.editTextUsername)
-        editTextEmail = findViewById(R.id.editTextEmail)
-        editTextPassword = findViewById(R.id.editTextPassword)
-        radioGroupGender = findViewById(R.id.radioGender)
-
-        binding.textViewLogin.setOnClickListener {
-            registerUser()
-        }
-
-        /*buttonRegister.setOnClickListener(View.OnClickListener {
-            //if user pressed on button register
-            //here we will register the user to server
-            registerUser()
-        })*/
-
-        binding.textViewLogin.setOnClickListener {
+        binding.loginactivity.setOnClickListener {
             finish()
             startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
         }
 
-        /*textViewLogin.setOnClickListener(View.OnClickListener {
-            finish()
-            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
-        })*/
-    }
+        binding.buttonRegister.setOnClickListener{
+            if(forme_Valide()){
+                val firstname = binding.nameCreateAccountInput.text.toString()
+                val name = binding.surnameCreateAccountInput.text.toString()
+                val address = binding.addressCreateAccountInput.text.toString()
+                val email = binding.emailCreateAccountInput.text.toString()
+                val password = binding.passwordCreateAccountInput.text.toString()
 
-    private fun registerUser() {
-        val username = editTextUsername.text.toString().trim { it <= ' ' }
-        val email = editTextEmail.text.toString().trim { it <= ' ' }
-        val password = editTextPassword.text.toString().trim { it <= ' ' }
+                //request post
 
-        val gender = (findViewById<View>(radioGroupGender.checkedRadioButtonId) as RadioButton).text.toString()
 
-        //first we will do the validations
-        if (TextUtils.isEmpty(username)) {
-            editTextUsername.error = "Please enter username"
-            editTextUsername.requestFocus()
-            return
+                val text = "Incription réussie"
+                val duration = Toast.LENGTH_SHORT
+                val toast = Toast.makeText(applicationContext, text, duration)
+                toast.show()
+
+
+                // Run volley
+
+                    val url = "http://test.api.catering.bluecodegames.com/user/register\n"
+
+                    // Post parameters
+                    // Form fields and values
+                    val params = HashMap<String, String>()
+                    params["id_shop"] = "1"
+                    params["lastname"] = name
+                    params["address"] = address
+                    params["email"] = email
+                    params["password"] = password
+                    params["firstname"] = firstname
+
+
+                    val jsonObject = JSONObject(params as Map<*, *>?)
+
+                    // Volley post request with parameters
+                    val request = JsonObjectRequest(
+                        Request.Method.POST, url, jsonObject,
+                        { response ->
+                            // Process the json
+                            try
+                            {
+                                Log.d("Response:", "$response")
+                            }
+                            catch (e: Exception)
+                            {
+                                Log.d("Exception :", "$e")
+                            }
+
+                            Log.d("", "$response")
+                        },
+                        {
+                            // Error in request
+                            Log.d("Volley error:", "$it")
+                        }
+                    )
+
+
+                    // Volley request policy, only one time request to avoid duplicate transaction
+                    request.retryPolicy = DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        // 0 means no retry
+                        0, // DefaultRetryPolicy.DEFAULT_MAX_RETRIES = 2
+                        1f // DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+                    )
+                    VolleySingleton.getInstance(this).addToRequestQueue(request)
+
+        }
+    }}
+
+    // Permet de valider ou de refuser les entrées
+    private fun forme_Valide(): Boolean{
+
+        // Liste Erreurs
+        val champNonRempli = "Champ vide"
+        val passwordNotLongEnough = "Nombre de caracteres insuffisants"
+        val mailinvalide = "Adresse email invalide"
+        var error = true
+
+        //Surname
+        if (binding.surnameCreateAccountInput.text.toString().trim().isEmpty())
+        {
+            binding.surnameCreateAccount.error = champNonRempli
+            error = false
+        }
+        else
+        {
+            binding.surnameCreateAccount.error = null
         }
 
-        if (TextUtils.isEmpty(email)) {
-            editTextEmail.error = "Please enter your email"
-            editTextEmail.requestFocus()
-            return
+        //Name
+        if (binding.nameCreateAccountInput.text.toString().trim().isEmpty()){
+            binding.nameCreateAccount.error = champNonRempli
+            error = false
+        }
+        else
+        {
+            binding.nameCreateAccount.error = null
         }
 
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.error = "Enter a valid email"
-            editTextEmail.requestFocus()
-            return
+        //Address
+        if (binding.addressCreateAccountInput.text.toString().trim().isEmpty())
+        {
+            binding.addressCreateAccount.error = champNonRempli
+            error = false
+        }
+        else
+        {
+            binding.addressCreateAccount.error = null
         }
 
-        if (TextUtils.isEmpty(password)) {
-            editTextPassword.error = "Enter a password"
-            editTextPassword.requestFocus()
-            return
+        // Email
+        if (binding.emailCreateAccountInput.text.toString().trim().isEmpty())
+        {
+            binding.emailCreateAccount.error = champNonRempli
+            error = false
+        }
+        else
+        {
+            binding.emailCreateAccount.error = null
         }
 
-        val stringRequest = object : StringRequest(Request.Method.POST, URLs.URL_REGISTER,
-            Response.Listener { response ->
-                progressBar.visibility = View.GONE
+        // MDP
 
-                try {
-                    //converting response to json object
-                    val obj = JSONObject(response)
-                    //if no error in response
-                    if (!obj.getBoolean("error")) {
-
-                        //getting the user from the response
-                        val userJson = obj.getJSONObject("user")
-
-                        //creating a new user object
-                        val user = User(
-                            userJson.getInt("id"),
-                            userJson.getString("username"),
-                            userJson.getString("email"),
-                            userJson.getString("gender")
-                        )
-
-                        //storing the user in shared preferences
-                        SharedPrefManager.getInstance(applicationContext).userLogin(user)
-
-                        //starting the MainActivity activity
-                        finish()
-                        startActivity(Intent(applicationContext, Accueil::class.java))
-                    } else {
-                        Toast.makeText(applicationContext, obj.getString("message"), Toast.LENGTH_SHORT).show()
-                    }
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            },
-            Response.ErrorListener { error -> Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT).show() }) {
-            @Throws(AuthFailureError::class)
-            override fun getParams(): Map<String, String> {
-                val params = HashMap<String, String>()
-                params["username"] = username
-                params["email"] = email
-                params["password"] = password
-                params["gender"] = gender
-                return params
-            }
+        if (binding.emailCreateAccountInput.text.toString().trim().isEmpty())
+        {
+            binding.emailCreateAccount.error = champNonRempli
+            error = false
+        }
+        else
+        {
+            binding.emailCreateAccount.error = null
         }
 
-        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest)
+        //si adresse email invalide
+        if (""".+\@.+\..+""".toRegex().matches(binding.emailCreateAccountInput.text.toString()))
+        {
+            binding.emailCreateAccount.error = null
+        }
+
+        else
+        {
+            // Set error text
+            binding.emailCreateAccount.error = mailinvalide
+            error = false
+        }
+
+        // Not enough character in your password
+        if (binding.passwordCreateAccountInput.text.toString().length < 8)
+        {
+            binding.passwordCreateAccount.error = passwordNotLongEnough
+            error = false
+        }
+        else
+        {
+            binding.passwordCreateAccount.error = null
+        }
+
+        return error
     }
 }

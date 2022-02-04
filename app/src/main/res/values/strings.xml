@@ -7,4 +7,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">LoginActivity</string>
     <string name="register">RegisterActivity</string>
+    <string name="mot_de_passe_8_caract_res_minimum">Mot de passe (8 caractères minimum)</string>
+    <string name="s_inscrire">S\'inscrire</string>
+    <string name="already_registered_nlogin_here">Already Registered?\nLogin Here</string>
+    <string name="m_inscrire">M\'inscrire</string>
+    <string name="adresse_mail">Adresse mail</string>
+    <string name="adresse">Adresse</string>
+    <string name="pr_nom">Prénom</string>
+    <string name="nom">Nom</string>
 </resources>

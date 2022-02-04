@@ -15,4 +15,5 @@
     <string name="adresse">Adresse</string>
     <string name="pr_nom">Prénom</string>
     <string name="nom">Nom</string>
+    <string name="phone_number">Numéro de téléphone</string>
 </resources>

@@ -28,12 +28,13 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.buttonRegister.setOnClickListener{
-            if(forme_Valide()){
+            if(formeValide()){
                 val firstname = binding.nameCreateAccountInput.text.toString()
                 val name = binding.surnameCreateAccountInput.text.toString()
                 val address = binding.addressCreateAccountInput.text.toString()
                 val email = binding.emailCreateAccountInput.text.toString()
                 val password = binding.passwordCreateAccountInput.text.toString()
+                val phone = binding.phoneCreateAccountInput.text.toString()
 
                 //request post
 
@@ -57,6 +58,7 @@ class RegisterActivity : AppCompatActivity() {
                     params["email"] = email
                     params["password"] = password
                     params["firstname"] = firstname
+                    params["firstname"] = phone
 
 
                     val jsonObject = JSONObject(params as Map<*, *>?)
@@ -104,7 +106,7 @@ class RegisterActivity : AppCompatActivity() {
     }}
 
     // Permet de valider ou de refuser les entrées
-    private fun forme_Valide(): Boolean{
+    private fun formeValide(): Boolean{
 
         // Liste Erreurs
         val champNonRempli = "Champ vide"

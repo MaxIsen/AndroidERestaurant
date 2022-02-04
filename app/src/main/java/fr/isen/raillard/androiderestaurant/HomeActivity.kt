@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(changePage)
     }
 
+
     override fun onStop() {
         super.onStop()
         Log.d("HomeActivity", "Vous stoppez la page Home")
@@ -42,5 +43,16 @@ class MainActivity : AppCompatActivity() {
             activitySwapper(getString(R.string.home_desserts))
         }
 
+        binding.connexion.setOnClickListener{
+            startActivity(Intent(applicationContext, LoginActivity::class.java))
+        }
+
+        binding.inscription.setOnClickListener{
+            startActivity(Intent(applicationContext, RegisterActivity::class.java))
+        }
+
+        binding.profil.setOnClickListener{
+            startActivity(Intent(applicationContext, Accueil::class.java))
+        }
     }
 }

@@ -38,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
                 //request post
 
 
-                val text = "Incription réussie"
+                val text = "Incription réussie\nVous pouvez dorénavant vous connecter"
                 val duration = Toast.LENGTH_SHORT
                 val toast = Toast.makeText(applicationContext, text, duration)
                 toast.show()
@@ -93,6 +93,13 @@ class RegisterActivity : AppCompatActivity() {
                     )
                     VolleySingleton.getInstance(this).addToRequestQueue(request)
 
+
+                val text2 = "Redirection en cours"
+                val toast2 = Toast.makeText(applicationContext, text2, duration)
+                toast2.show()
+
+                finish()
+                startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
         }
     }}
 

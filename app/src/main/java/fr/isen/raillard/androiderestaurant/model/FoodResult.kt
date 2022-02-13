@@ -13,10 +13,7 @@ data class DishModel (
     val images : List<String>,
     val prices : List<PriceModel>,
     val ingredients : List<IngredientModel>
-    ) : Serializable /* {
-        fun getFirstPicture() = if(images[0].isNotEmpty()) images[0] else null
-        fun getFormattedPrice() = prices[0].prices + "€"
-    }*/
+    ) : Serializable
 
 data class PriceModel (val price : String) : Serializable
 

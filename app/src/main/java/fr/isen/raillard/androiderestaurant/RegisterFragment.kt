@@ -19,48 +19,6 @@ import fr.isen.raillard.androiderestaurant.databinding.FragmentRegisterBinding
 import fr.isen.raillard.androiderestaurant.model.RegisterModel
 import org.json.JSONObject
 
-/*
-class RegisterFragment : Fragment() {
-    lateinit var binding: FragmentRegisterBinding
-
-    var interactor = UserActivityFragmentInteraction? = null
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        interactor = context as? UserActivityFragmentInteraction
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.loginactivity.setOnClickListener{
-            interactor?.showLogin()
-        }
-
-        binding.buttonRegister.setOnClickListener{
-            interactor?.showRegister()
-        }
-    }
-
-
-
-}
-*/
-
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding

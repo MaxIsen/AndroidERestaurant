@@ -9,12 +9,6 @@ class LandingPageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLandingPageBinding
 
-    /*private fun activitySwapper(category: String) {
-        val changePage = Intent(this, FoodActivity::class.java)
-        changePage.putExtra("category_type", category)
-        startActivity(changePage)
-    }*/
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

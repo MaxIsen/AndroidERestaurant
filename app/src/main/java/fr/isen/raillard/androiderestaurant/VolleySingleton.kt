@@ -1,5 +1,6 @@
 package fr.isen.raillard.androiderestaurant
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -28,7 +29,9 @@ class VolleySingleton private constructor(context: Context) {
     }
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         private var mInstance: VolleySingleton? = null
+        @SuppressLint("StaticFieldLeak")
         private var mCtx: Context? = null
 
         @Synchronized

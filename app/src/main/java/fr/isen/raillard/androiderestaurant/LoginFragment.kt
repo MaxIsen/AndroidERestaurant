@@ -13,48 +13,11 @@ import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import fr.isen.raillard.androiderestaurant.basket.BasketActivity
 import fr.isen.raillard.androiderestaurant.databinding.FragmentLoginBinding
 import fr.isen.raillard.androiderestaurant.model.RegisterModel
 import org.json.JSONObject
-
-/*class LoginFragment : Fragment() {
-    lateinit var binding: FragmentLoginBinding
-
-
-    //var interactor = UserActivityFragmentInteraction? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = FragmentLoginBinding.inflate(layoutInflater)
-
-    }
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-       // interactor = context as? UserActivityFragmentInteraction
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.tvRegister.setOnClickListener{
-            //finish()
-           // startActivity(Intent(applicationContext, RegisterActivity::class.java))
-        }
-    }
-}*/
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
@@ -99,22 +62,28 @@ class LoginFragment : Fragment() {
             val jsonObject = JSONObject(params as HashMap<*, *>)
             val request = JsonObjectRequest(
                 Request.Method.POST, url, jsonObject,
-                { response ->
-                    val register =
-                        GsonBuilder().create()
-                            .fromJson(response.toString(), RegisterModel::class.java)
-                    val editor =
-                        requireContext().getSharedPreferences(
-                            DetailActivity.APP_PREFS,
-                            Context.MODE_PRIVATE
-                        ).edit()
-                    Log.d("",register.data.userId)
-                    editor.putString(USER_ID, register.data.userId)
-                    editor.apply()
-                    startActivity(Intent(requireContext(), BasketActivity::class.java))
-                }, {
+                {response ->
+                    val httpanswer = Gson().fromJson(response.toString(), LoginResult::class.java)
+                    if(httpanswer.code=="200")  {
+                        val register =
+                            GsonBuilder().create()
+                                .fromJson(response.toString(), RegisterModel::class.java)
+                        val editor =
+                            requireContext().getSharedPreferences(
+                                DetailActivity.APP_PREFS,
+                                Context.MODE_PRIVATE
+                            ).edit()
+                        Log.d("",register.data.userId)
+                        editor.putString(USER_ID, register.data.userId)
+                        editor.apply()
+                        startActivity(Intent(requireContext(), OrderedActivity::class.java))
+                    }
+                    }
+                    , {
                     Log.d("Login", "error ${it}")
                 })
+
+
             request.retryPolicy = DefaultRetryPolicy(
                 DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
 
@@ -122,6 +91,7 @@ class LoginFragment : Fragment() {
                 1f
             )
             queue.add(request)
+
         }
     }
     companion object {

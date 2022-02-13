@@ -1,13 +1,19 @@
 package fr.isen.raillard.androiderestaurant.basket
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import com.google.gson.GsonBuilder
+import fr.isen.raillard.androiderestaurant.databinding.ActivityBasketBinding
+import fr.isen.raillard.androiderestaurant.databinding.ActivityFoodBinding
 import fr.isen.raillard.androiderestaurant.model.DishModel
 import java.io.File
 import java.io.Serializable
 
 class Basket(val items: MutableList<BasketItem>): Serializable {
+
+    private lateinit var binding: ActivityBasketBinding
+
     val itemsCount: Int
         get () {
             val count = items.map {
@@ -16,12 +22,6 @@ class Basket(val items: MutableList<BasketItem>): Serializable {
                 acc, i -> acc + i
             }
             return count
-
-            //var count = 0
-            //items.forEach {
-            //    count += count + it.quantity
-            // }
-            //return count
         }
 
     val prixtotal: Float

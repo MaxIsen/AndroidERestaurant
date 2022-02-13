@@ -19,4 +19,6 @@
     <string name="total"> Total : </string>
     <string name="itemAdded"> Votre plat a bien été ajouté à votre panier </string>
     <string name="basket"> Panier </string>
+    <string name="register_title">RegisterFragment</string>
+    <string name="login_title">LoginFragment</string>
 </resources>

@@ -1,8 +1,10 @@
 package fr.isen.raillard.androiderestaurant.basket
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import fr.isen.raillard.androiderestaurant.UserActivity
 import fr.isen.raillard.androiderestaurant.databinding.ActivityBasketBinding
 
 class BasketActivity : AppCompatActivity() {
@@ -14,6 +16,10 @@ class BasketActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         loadList()
+
+        binding.passercommande.setOnClickListener{
+            startActivity(Intent(this, UserActivity::class.java))
+        }
     }
 
     private fun loadList() {

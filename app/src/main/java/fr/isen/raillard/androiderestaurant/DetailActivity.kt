@@ -74,4 +74,8 @@ class DetailActivity : BaseActivity() {
             invalidateOptionsMenu()
         }
     }
+
+    companion object {
+        const val APP_PREFS = "app_prefs"
+    }
 }

@@ -41,7 +41,7 @@ class MainActivity : BaseActivity() {
             activitySwapper(getString(R.string.home_desserts))
         }
 
-        binding.connexion.setOnClickListener{
+        /*binding.connexion.setOnClickListener{
             startActivity(Intent(applicationContext, LoginActivity::class.java))
         }
 
@@ -51,6 +51,6 @@ class MainActivity : BaseActivity() {
 
         binding.profil.setOnClickListener{
             startActivity(Intent(applicationContext, Accueil::class.java))
-        }
+        }*/
     }
 }

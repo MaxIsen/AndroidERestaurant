@@ -1,7 +1,8 @@
 package fr.isen.raillard.androiderestaurant
-
+/*
 import android.content.Context
 import android.content.Intent
+import com.google.firebase.firestore.auth.User
 
 class SharedPrefManager private constructor(context: Context) {
 
@@ -65,4 +66,4 @@ class SharedPrefManager private constructor(context: Context) {
             return mInstance as SharedPrefManager
         }
     }
-}
+}*/

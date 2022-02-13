@@ -39,7 +39,7 @@ class RegisterActivity : AppCompatActivity() {
                 //request post
 
 
-                val text = "Incription réussie\nVous pouvez dorénavant vous connecter"
+                val text = "Incription réussie,\nVous pouvez dorénavant vous connecter"
                 val duration = Toast.LENGTH_SHORT
                 val toast = Toast.makeText(applicationContext, text, duration)
                 toast.show()
@@ -58,7 +58,7 @@ class RegisterActivity : AppCompatActivity() {
                     params["email"] = email
                     params["password"] = password
                     params["firstname"] = firstname
-                    params["firstname"] = phone
+                    params["phone"] = phone
 
 
                     val jsonObject = JSONObject(params as Map<*, *>?)
@@ -106,91 +106,96 @@ class RegisterActivity : AppCompatActivity() {
     }}
 
     // Permet de valider ou de refuser les entrées
-    private fun formeValide(): Boolean{
+    private fun formeValide(): Boolean {
 
         // Liste Erreurs
         val champNonRempli = "Champ vide"
         val passwordNotLongEnough = "Nombre de caracteres insuffisants"
         val mailinvalide = "Adresse email invalide"
+        val telephoneinvalide = "Numéro de téléphone invalide"
         var error = true
 
         //Surname
-        if (binding.surnameCreateAccountInput.text.toString().trim().isEmpty())
-        {
+        if (binding.surnameCreateAccountInput.text.toString().trim().isEmpty()) {
             binding.surnameCreateAccount.error = champNonRempli
             error = false
-        }
-        else
-        {
+        } else {
             binding.surnameCreateAccount.error = null
         }
 
         //Name
-        if (binding.nameCreateAccountInput.text.toString().trim().isEmpty()){
+        if (binding.nameCreateAccountInput.text.toString().trim().isEmpty()) {
             binding.nameCreateAccount.error = champNonRempli
             error = false
-        }
-        else
-        {
+        } else {
             binding.nameCreateAccount.error = null
         }
 
         //Address
-        if (binding.addressCreateAccountInput.text.toString().trim().isEmpty())
-        {
+        if (binding.addressCreateAccountInput.text.toString().trim().isEmpty()) {
             binding.addressCreateAccount.error = champNonRempli
             error = false
-        }
-        else
-        {
+        } else {
             binding.addressCreateAccount.error = null
         }
 
         // Email
-        if (binding.emailCreateAccountInput.text.toString().trim().isEmpty())
-        {
+        if (binding.emailCreateAccountInput.text.toString().trim().isEmpty()) {
             binding.emailCreateAccount.error = champNonRempli
             error = false
-        }
-        else
-        {
+        } else {
             binding.emailCreateAccount.error = null
         }
 
         // MDP
 
-        if (binding.emailCreateAccountInput.text.toString().trim().isEmpty())
-        {
+        if (binding.emailCreateAccountInput.text.toString().trim().isEmpty()) {
             binding.emailCreateAccount.error = champNonRempli
             error = false
-        }
-        else
-        {
+        } else {
             binding.emailCreateAccount.error = null
         }
 
         //si adresse email invalide
-        if (""".+\@.+\..+""".toRegex().matches(binding.emailCreateAccountInput.text.toString()))
-        {
+        if (""".+\@.+\..+""".toRegex().matches(binding.emailCreateAccountInput.text.toString())) {
             binding.emailCreateAccount.error = null
-        }
-
-        else
-        {
+        } else {
             // Set error text
             binding.emailCreateAccount.error = mailinvalide
             error = false
         }
 
         // Not enough character in your password
-        if (binding.passwordCreateAccountInput.text.toString().length < 8)
-        {
+        if (binding.passwordCreateAccountInput.text.toString().length < 8) {
             binding.passwordCreateAccount.error = passwordNotLongEnough
             error = false
-        }
-        else
-        {
+        } else {
             binding.passwordCreateAccount.error = null
+        }
+
+        //Numero de telephone invalide
+        if (binding.phoneCreateAccountInput.text.toString().trim().isEmpty()) {
+            binding.phoneCreateAccount.error = champNonRempli
+            error = false
+        }
+
+        if (binding.phoneCreateAccountInput.text.toString().length == 10) {
+            binding.phoneCreateAccount.error = null
+            val phonenumber = binding.phoneCreateAccountInput.text.toString()
+            for (i in 0..9)
+            {
+                if (phonenumber[i] < '0' || phonenumber[i] > '9') {
+                    binding.phoneCreateAccount.error = telephoneinvalide
+                    error = false
+                }
+                else {
+                    binding.phoneCreateAccount.error = null
+                }
+            }
+        }
+        else {
+            binding.phoneCreateAccount.error = telephoneinvalide
+            error = false
         }
 
         return error

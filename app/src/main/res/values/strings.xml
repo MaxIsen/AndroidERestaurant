@@ -16,4 +16,7 @@
     <string name="pr_nom">Prénom</string>
     <string name="nom">Nom</string>
     <string name="phone_number">Numéro de téléphone</string>
+    <string name="total"> Total : </string>
+    <string name="itemAdded"> Votre plat a bien été ajouté à votre panier </string>
+    <string name="basket"> Panier </string>
 </resources>

@@ -1,5 +1,6 @@
 package fr.isen.raillard.androiderestaurant
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -20,9 +21,8 @@ class FoodAdapter(val foods: List<DishModel>, val onFoodClicked: (DishModel) -> 
         return FoodViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
-
-
         val dish = foods[position]
 
         if(dish.images[0]!="") {
@@ -30,9 +30,6 @@ class FoodAdapter(val foods: List<DishModel>, val onFoodClicked: (DishModel) -> 
                 .load(dish.images[0])
                 .error(R.drawable.pizza)
                 .into(holder.foodPicture)
-
-
-
         }
         else{
             holder.foodPicture.setImageResource(R.drawable.pizza)

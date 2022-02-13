@@ -86,7 +86,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phoneCreateAccount"
+            android:id="@+id/emailCreateAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -96,11 +96,11 @@
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addressCreateAccount"
+            app:layout_constraintTop_toBottomOf="@+id/emailCreateAccount"
             tools:ignore="DuplicateIds">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phoneCreateAccountInput"
+                android:id="@+id/emailCreateAccountInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress" />
@@ -121,7 +121,7 @@
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phoneCreateAccount">
+            app:layout_constraintTop_toBottomOf="@+id/passwordCreateAccount">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -134,7 +134,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailCreateAccount"
+            android:id="@+id/phoneCreateAccount"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="32dp"
@@ -144,10 +144,10 @@
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addressCreateAccount">
+            app:layout_constraintTop_toBottomOf="@+id/phoneCreateAccount">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailCreateAccountInput"
+                android:id="@+id/phoneCreateAccountInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone" />
@@ -186,7 +186,7 @@
         android:id="@+id/loginactivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/already_registered_nlogin_here"
         android:textAlignment="center"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -198,8 +198,9 @@
         android:id="@+id/buttonRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/s_inscrire"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/blue"
+        android:text="@string/s_inscrire"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,17 +1,18 @@
 package fr.isen.raillard.androiderestaurant
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
-import com.squareup.picasso.Picasso
+import com.google.android.material.snackbar.Snackbar
+import fr.isen.raillard.androiderestaurant.basket.Basket
 import fr.isen.raillard.androiderestaurant.databinding.DetailsBinding
 import fr.isen.raillard.androiderestaurant.model.DishModel
 
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : BaseActivity() {
 
     private lateinit var binding:DetailsBinding
+
+    private var itemCount = 1
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -23,37 +24,11 @@ class DetailActivity : AppCompatActivity() {
 
         val dish = intent.getSerializableExtra("dish") as DishModel
         initDetail(dish)
-
-        /*setContentView(R.layout.activity_detail)
-        findViewById<TextView>(R.id.TitreDetail).text = (intent.getSerializableExtra("food") as DishModel).name_fr
-
-        val itemDish = intent.getSerializableExtra("food") as DishModel
-
-        val detailtitle = findViewById<TextView>(R.id.TitreDetail)
-        detailtitle.setText(itemDish.name_fr)
-        val detailimage = findViewById<ImageView>(R.id.detailImage)
-        if(itemDish.images[0]!="") {
-            Picasso.get()
-                .load(itemDish.images[0])
-                .error(R.drawable.pizza)
-                .into(detailimage)
-        }
-        else{
-            detailimage.setImageResource(R.drawable.pizza)
-        }
-
-        val detailprice = findViewById<TextView>(R.id.detailprice)
-        detailprice.setText(itemDish.prices[0].price + "€")
-
-        val detailtext = findViewById<TextView>(R.id.detailtext)
-
-        for (i in itemDish.ingredients)
-            detailtext.append(i.name_fr + " \n")*/
-
+        clickObserver()
+        refreshShop()
     }
 
     private fun initDetail(dish: DishModel) {
-        var nbInBasket =  1
         binding.detailTitle.text = dish.name_fr
 
         binding.Price.text = dish.prices.joinToString("\n") { it.price + "€" }
@@ -61,8 +36,42 @@ class DetailActivity : AppCompatActivity() {
         binding.dishPhotoPager.adapter = DishPictureAdapter(this, dish.images)
 
         binding.dishIngredient.text = dish.ingredients.joinToString("\n") { it.name_fr }
+    }
 
-        // TODO : quand je clique sur le bouton plus, j'incrémente nbInBasket
-        // TODO : quand je clique sur le bouton moins, je décrémente nbInBasket tout en vérifiant qu'il ne devienne pas négatif
+    @SuppressLint("SetTextI18n")
+    private fun refreshShop() {
+        val dish = intent.getSerializableExtra("dish") as DishModel
+        val price = dish.prices.first().price.toFloat()
+        binding.validation.text = "${getString(R.string.total)} ${ price * itemCount } € \n Ajouter au panier"
+        binding.quantity.text = "$itemCount"
+    }
+
+    private fun clickObserver() {
+        val dish = intent.getSerializableExtra("dish") as DishModel
+        binding.boutonMoins.setOnClickListener{
+            if ( itemCount == 1)
+            {
+                itemCount = 1
+            }
+            else {
+                itemCount -= 1
+            }
+            refreshShop()
+        }
+
+        binding.boutonPlus.setOnClickListener {
+            itemCount += 1
+            refreshShop()
+        }
+
+        binding.validation.setOnClickListener {
+            // Add to basket
+            this.cacheDir.absolutePath
+            val basket = Basket.getBasket(this)
+            basket.addItem(dish, itemCount)
+            basket.save(this)
+            Snackbar.make(binding.root, R.string.itemAdded, Snackbar.LENGTH_LONG).show()
+            invalidateOptionsMenu()
+        }
     }
 }

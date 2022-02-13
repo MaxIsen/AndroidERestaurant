@@ -14,7 +14,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.google.gson.Gson
 import fr.isen.raillard.androiderestaurant.model.DishResult
 
-class FoodActivity : AppCompatActivity() {
+class FoodActivity : BaseActivity() {
 
     private lateinit var binding: ActivityFoodBinding
 

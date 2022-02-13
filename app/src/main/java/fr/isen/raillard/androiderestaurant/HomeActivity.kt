@@ -1,12 +1,11 @@
 package fr.isen.raillard.androiderestaurant
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import fr.isen.raillard.androiderestaurant.databinding.ActivityHomeBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityHomeBinding
 
     private fun activitySwapper(category: String) {
@@ -14,7 +13,6 @@ class MainActivity : AppCompatActivity() {
         changePage.putExtra("category_type", category)
         startActivity(changePage)
     }
-
 
     override fun onStop() {
         super.onStop()

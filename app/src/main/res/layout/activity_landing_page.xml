@@ -11,6 +11,7 @@
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="60dp"
         android:fontFamily="casual"
         android:text="Welcome to your favourite Restorant !"

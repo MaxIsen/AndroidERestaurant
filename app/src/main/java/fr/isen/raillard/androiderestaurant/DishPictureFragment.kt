@@ -23,10 +23,14 @@ class DishPictureFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getString("picture_url")?.let { pictureUrl ->
-            Picasso.get()
-                .load(pictureUrl)
-                .placeholder(R.drawable.risotto)
-                .into(binding.dishPictureFrag)
+            if(pictureUrl.isNotEmpty()){
+                Picasso.get()
+                    .load(pictureUrl)
+                    .placeholder(R.drawable.risotto)
+                    .into(binding.dishPictureFrag)
+            }else {
+                binding.dishPictureFrag.setImageResource(R.drawable.pizza)
+            }
         }
     }
 

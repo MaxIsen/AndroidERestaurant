@@ -12,7 +12,6 @@ import java.io.Serializable
 
 class Basket(val items: MutableList<BasketItem>): Serializable {
 
-    private lateinit var binding: ActivityBasketBinding
 
     val itemsCount: Int
         get () {
@@ -52,8 +51,7 @@ class Basket(val items: MutableList<BasketItem>): Serializable {
 
     fun save(context: Context) {
         val jsonFile = File(context.cacheDir.absolutePath + BASKET_FILE)
-        val json = GsonBuilder().create().toJson(this)
-        jsonFile.writeText(json)
+        jsonFile.writeText(GsonBuilder().create().toJson(this))
         updateCounter(context)
     }
 

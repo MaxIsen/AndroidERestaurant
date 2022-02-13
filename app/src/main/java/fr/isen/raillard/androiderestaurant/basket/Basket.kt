@@ -10,18 +10,18 @@ import java.io.Serializable
 class Basket(val items: MutableList<BasketItem>): Serializable {
     val itemsCount: Int
         get () {
-            /*val count = items.map {
+            val count = items.map {
                 it.quantity
             }.reduce {
                 acc, i -> acc + i
             }
-            return count*/
-
-            var count = 0
-            items.forEach {
-                count += count + it.quantity
-            }
             return count
+
+            //var count = 0
+            //items.forEach {
+            //    count += count + it.quantity
+            // }
+            //return count
         }
 
     val prixtotal: Float
@@ -47,7 +47,7 @@ class Basket(val items: MutableList<BasketItem>): Serializable {
     }
 
     fun removeDish(basketItem: BasketItem) {
-
+        items.remove(basketItem)
     }
 
     fun save(context: Context) {

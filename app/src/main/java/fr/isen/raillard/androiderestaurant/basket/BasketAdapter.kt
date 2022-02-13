@@ -10,7 +10,10 @@ import com.squareup.picasso.Picasso
 import fr.isen.raillard.androiderestaurant.R
 import fr.isen.raillard.androiderestaurant.databinding.CellBasketBinding
 
-class BasketAdapter(private val items: List<BasketItem>): RecyclerView.Adapter<BasketAdapter.BasketViewHolder>() {
+class BasketAdapter(
+    private val items: List<BasketItem>,
+    val deleteDishClickListener: (BasketItem) -> Unit)
+    : RecyclerView.Adapter<BasketAdapter.BasketViewHolder>() {
 
     class BasketViewHolder(binding: CellBasketBinding) : RecyclerView.ViewHolder(binding.root) {
         val dishName: TextView = binding.dishname
@@ -30,6 +33,11 @@ class BasketAdapter(private val items: List<BasketItem>): RecyclerView.Adapter<B
         holder.dishName.text = basketItem.dish.name_fr
         holder.dishQuantity.text = "Quantity : " + basketItem.quantity.toString()
         holder.dishPrice.text = basketItem.dish.prices.first().price + " € "
+
+        holder.delete.setOnClickListener{
+            deleteDishClickListener.invoke(basketItem)
+        }
+
         Picasso.get()
             .load(basketItem.dish.images[0])
             .placeholder(R.drawable.risotto)

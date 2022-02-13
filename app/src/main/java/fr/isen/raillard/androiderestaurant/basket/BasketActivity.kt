@@ -17,8 +17,13 @@ class BasketActivity : AppCompatActivity() {
     }
 
     private fun loadList() {
-        val items = Basket.getBasket(this).items
+        val basket = Basket.getBasket(this)
+        val items = basket.items
         binding.recyclerViewBasket.layoutManager = LinearLayoutManager(this)
-        binding.recyclerViewBasket.adapter = BasketAdapter(items)
+        binding.recyclerViewBasket.adapter = BasketAdapter(items) {
+            basket.removeDish(it)
+            basket.save(this)
+            loadList()
+        }
     }
 }
